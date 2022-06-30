@@ -1,0 +1,32 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "dockerfile",
+			"request": "launch",
+			"name": "Debug Dockerfile",
+			"program": "${workspaceFolder}/Dockerfile",
+			"stopOnEntry": true,
+		},
+		{
+			"type": "dockerfile",
+			"request": "launch",
+			"name": "Debug Dockerfile Without Stop On Entry",
+			"program": "${workspaceFolder}/Dockerfile",
+			"stopOnEntry": false,
+		},
+		{
+			"type": "dockerfile",
+			"request": "launch",
+			"name": "Debug Dockerfile With Options",
+			"program": "${workspaceFolder}/Dockerfile",
+			"stopOnEntry": true,
+			"build-args": [ "FOO=bar", "AAA=bbbbb" ],
+			"target": "build2",
+			"image": "ghcr.io/stargz-containers/ubuntu:20.04-org",
+		},
+	]
+}

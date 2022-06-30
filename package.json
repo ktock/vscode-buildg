@@ -1,0 +1,170 @@
+{
+    "name": "buildg",
+    "displayName": "buildg",
+    "description": "Dockerfile Debugger",
+    "version": "0.1.0",
+    "publisher": "Kohei Tokunaga",
+    "engines": {
+	"vscode": "^1.66.0"
+    },
+    "categories": [
+	"Debuggers"
+    ],
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ktock/vscode-buildg.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ktock/vscode-buildg/issues"
+    },
+    "activationEvents": [
+        "onDebugResolve:dockerfile",
+        "onDebugDynamicConfigurations:dockerfile",
+        "onCommand:extension.buildg.getProgramName",
+        "onCommand:extension.buildg.runEditorContents",
+        "onCommand:extension.buildg.debugEditorContents"
+    ],
+    "main": "./out/extension.js",
+    "scripts": {
+	"vscode:prepublish": "npm run compile",
+	"compile": "tsc -p ./",
+	"watch": "tsc -watch -p ./",
+	"pretest": "npm run compile && npm run lint",
+	"lint": "eslint src --ext ts",
+	"test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+	"@types/vscode": "^1.66.0",
+	"@types/glob": "^7.2.0",
+	"@types/mocha": "^9.1.1",
+	"@types/node": "18.x",
+	"@typescript-eslint/eslint-plugin": "^5.29.0",
+	"@typescript-eslint/parser": "^5.29.0",
+	"eslint": "^8.18.0",
+	"glob": "^8.0.3",
+	"mocha": "^10.0.0",
+	"typescript": "^4.7.4",
+	"@vscode/test-electron": "^2.1.4"
+    },
+    "contributes": {
+        "menus": {
+            "editor/title/run": [
+                {
+                    "command": "extension.buildg.runEditorContents",
+                    "when": "resourceLangId == dockerfile",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "extension.buildg.debugEditorContents",
+                    "when": "resourceLangId == dockerfile",
+                    "group": "navigation@2"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "extension.buildg.debugEditorContents",
+                    "when": "resourceLangId == dockerfile"
+                },
+                {
+                    "command": "extension.buildg.runEditorContents",
+                    "when": "resourceLangId == dockerfile"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "extension.buildg.debugEditorContents",
+                "title": "Debug File",
+                "category": "Dockerfile Debug",
+                "enablement": "!inDebugMode",
+                "icon": "$(debug-alt)"
+            },
+            {
+                "command": "extension.buildg.runEditorContents",
+                "title": "Run File",
+                "category": "Dockerfile Debug",
+                "enablement": "!inDebugMode",
+                "icon": "$(play)"
+            }
+        ],
+        "breakpoints": [
+            {
+                "language": "dockerfile"
+            }
+        ],
+        "debuggers": [
+            {
+                "type": "dockerfile",
+                "languages": [
+                    "dockerfile"
+                ],
+                "label": "Dockerfile Debug",
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "program"
+                        ],
+                        "properties": {
+                            "program": {
+                                "type": "string",
+                                "description": "Absolute path to a text file.",
+                                "default": "${workspaceFolder}/${command:AskForProgramName}"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "Automatically stop after launch.",
+                                "default": true
+                            },
+                            "target": {
+                                "type": "string",
+                                "description": "Target build stage to build."
+                            },
+                            "image": {
+                                "type": "string",
+                                "description": "Image to use for debugging stage."
+                            },
+                            "build-args": {
+                                "type": "array",
+                                "description": "Build-time variables."
+                            },
+                            "ssh": {
+                                "type": "array",
+                                "description": "Allow forwarding SSH agent to the build. Format: default|<id>[=<socket>|<key>[,<key>]]"
+                            },
+                            "secrets": {
+                                "type": "array",
+                                "description": "Expose secret value to the build. Format: id=secretname,src=filepath"
+                            }
+                        }
+                    }
+                },
+                "initialConfigurations": [
+                    {
+                        "type": "dockerfile",
+                        "request": "launch",
+                        "name": "Ask for file name",
+                        "program": "${workspaceFolder}/${command:AskForProgramName}",
+                        "stopOnEntry": true
+                    }
+                ],
+                "configurationSnippets": [
+                    {
+                        "label": "Dockerfile Debug: Launch",
+                        "description": "A new configuration for 'debugging' a user selected Dockerfile.",
+                        "body": {
+                            "type": "dockerfile",
+                            "request": "launch",
+                            "name": "Ask for file name",
+                            "program": "^\"\\${workspaceFolder}/\\${command:AskForProgramName}\"",
+                            "stopOnEntry": true
+                        }
+                    }
+                ],
+                "variables": {
+                    "AskForProgramName": "extension.buildg.getProgramName"
+                }
+            }
+        ]
+    }
+}
