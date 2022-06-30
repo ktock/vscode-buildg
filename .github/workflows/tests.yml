@@ -14,10 +14,9 @@ jobs:
         node: [ 14, 16, 18 ]
     steps:
     - uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
     - name: Compile
       run: npm run compile
     - name: Lint
