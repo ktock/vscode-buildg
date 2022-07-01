@@ -17,12 +17,11 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node }}
-    - name: Compile
-      run: npm run compile
-    - name: Lint
-      run: npm run lint
-    - name: Test
-      run: npm run test
+    - name: Build
+      run: |
+        npm install
+        npm run compile
+        npm run lint
     - name: Packaging
       run: |
         npm install -g vsce
