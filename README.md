@@ -52,3 +52,5 @@ Example launch.json is available at [`./sampleWorkspace/.vscode/launch.json`](./
 <!-- ### 0.1.0 -->
 
 <!-- Initial release -->
+
+test-ci
