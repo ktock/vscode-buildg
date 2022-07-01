@@ -13,6 +13,8 @@ You need to install buildg on your system to use this extension.
 - Interactive shell on a step with your own debugigng tools
 - Rootless execution
 
+Refer to buildg repo for usage: https://github.com/ktock/buildg/tree/main/examples/dap
+
 ![Buildg on VS Code](./images/vscode-dap.png)
 
 ## Install
