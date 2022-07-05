@@ -13,7 +13,9 @@ You need to install buildg on your system to use this extension.
 - Interactive shell on a step with your own debugigng tools
 - Rootless execution
 
-Refer to buildg repo for usage: https://github.com/ktock/buildg/tree/main/examples/dap
+Usage of debugger UI is documented in the VS Code documentation: https://code.visualstudio.com/docs/editor/debugging
+
+Refer to buildg repo for detailed usage of buildg (REPL, configuration, known limitations, etc.): https://github.com/ktock/buildg/tree/main/examples/dap
 
 ![Buildg on VS Code](./images/vscode-dap.png)
 
@@ -45,9 +47,18 @@ The following propertiess are provided.
 - `ssh` *array* : Allow forwarding SSH agent to the build. Format: `default|<id>[=<socket>|<key>[,<key>]]`
 - `secrets` *array* : Expose secret value to the build. Format: `id=secretname,src=filepath`
 
+Common and mandatory properties are the following (see [VS Code documentation](https://code.visualstudio.com/docs/editor/debugging#_launchjson-attributes) for details).
+
+- `type` : Type of debugger to use. Must be `dockerfile`.
+- `request` : The request type. `launch` is only supported in buildg as of now.
+- `name` : The reader-friendly name of this configuration.
+
 Example launch.json is available at [`./sampleWorkspace/.vscode/launch.json`](./sampleWorkspace/.vscode/launch.json)
 
 ## Known Issues
+
+- Issue tracker of vscode-buildg: https://github.com/ktock/vscode-buildg/issues
+- Issue tracker of buidg: https://github.com/ktock/buildg/issues
 
 ## Release Notes
 
