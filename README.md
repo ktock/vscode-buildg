@@ -4,7 +4,7 @@ This is an extension for VS Code.
 This extension enables interactive debugging of Dockerfile.
 
 This extension depends on [buildg](https://github.com/ktock/buildg), an interactive debugger for Dockerfile.
-You need to install buildg on your system to use this extension.
+You need to install buildg >= v0.4.0 on your system to use this extension.
 
 ## Features
 
@@ -22,7 +22,7 @@ Refer to buildg repo for detailed usage of buildg (REPL, configuration, known li
 ## Install
 
 - Requirements
-  - [buildg](https://github.com/ktock/buildg) needs to be installed.
+  - [buildg](https://github.com/ktock/buildg) >= v0.4.0 needs to be installed on the host.
 
 Released VSIX files are available from https://github.com/ktock/vscode-buildg/releases
 
@@ -65,3 +65,9 @@ Example launch.json is available at [`./sampleWorkspace/.vscode/launch.json`](./
 ### 0.1.0
 
 Initial release
+
+### 0.2.0
+
+Run on buildg v0.4.0
+
+> NOTE: buildg >= v0.4.0 is required since this release.

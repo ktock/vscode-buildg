@@ -49,6 +49,6 @@ export function deactivate() {}
 
 class DebugAdapterExecutableFactory implements vscode.DebugAdapterDescriptorFactory {
 	createDebugAdapterDescriptor(_session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): ProviderResult<vscode.DebugAdapterDescriptor> {
-	    return new vscode.DebugAdapterExecutable("buildg.sh", ["dap", "serve"], {});
+	    return new vscode.DebugAdapterExecutable("buildg", ["dap", "serve"], {});
 	}
 }
